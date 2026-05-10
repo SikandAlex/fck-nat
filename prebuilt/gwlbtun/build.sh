@@ -33,13 +33,13 @@ echo
 # Install build deps (we're in an AL2023 container)
 #-------------------------------------------------------------------------------
 echo "=== Installing build dependencies ==="
-dnf install -y \
+# curl/tar/gzip ship with the base amazonlinux:2023 image (as curl-minimal etc.)
+# so we only install what's missing. --allowerasing protects against future
+# package conflicts if AWS swaps which "minimal" subset ships by default.
+dnf install -y --allowerasing \
     cmake \
     gcc gcc-c++ \
     git \
-    curl \
-    tar \
-    gzip \
     make \
     ruby ruby-devel \
     rpm-build \
